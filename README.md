@@ -1,2 +1,3 @@
 # magalu-favorites-api
- API development
+
+#### \< In Progress... >

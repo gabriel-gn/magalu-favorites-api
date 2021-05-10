@@ -1,0 +1,8 @@
+# DJANGO
+Django==3.2.2
+psycopg2-binary==2.8.6
+djangorestframework==3.12.4
+django-cors-headers==3.7.0
+
+# PYTHON GERAL
+requests==2.25.1
