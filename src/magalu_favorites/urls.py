@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.http import HttpResponse
+from django.urls import path, include
+
+
+def django_healthcheck(request):
+    # só pra não deixar o index em branco...se der tempo coloco isso no docker
+    html = "<html><body>healthcheck ok</body></html>"
+    return HttpResponse(html)
+
 
 urlpatterns = [
+    path('', django_healthcheck, name='index'),
     path('admin/', admin.site.urls),
+    path('u/', include('user_profile.urls')),
 ]
