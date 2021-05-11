@@ -72,14 +72,18 @@ class RegisterUser(APIView):
                 "password": "hello_world*"
             }
         """
-        required_keys = ['name', 'email', 'password']
+        required_keys = ['name', 'email']
         request_data_keys = list(request.data.keys())
         if all([key in request_data_keys for key in required_keys]):
             name = request.data['name']
             email = request.data['email']
             if User.objects.filter(username=email).exists():
                 return GeneralApiResponse.conflict()
-            password = request.data['password']
+            # caso não forneça password, é gerado um aleatório, apenas para criar o usuário
+            if 'password' in request_data_keys:
+                password = request.data['password']
+            else:
+                password = User.objects.make_random_password()
             splitted_name = name.split(' ')
             first_name = splitted_name[0]
             last_name = ' '.join(splitted_name[1:])
