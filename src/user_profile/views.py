@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 from src.user_profile.serializers import UserSerializer
+from src.user_profile.tasks import get_user_from_request
 from src.utils.general_responses import GeneralApiResponse
 from src.utils.permissions import SuperuserPermission
 
@@ -125,6 +126,21 @@ class UserActions(APIView):
             serializer = UserSerializer(request.user, many=False)
         return JsonResponse(serializer.data, safe=False)
 
+    def delete(self, request, *args, **kwargs):
+        """
+        Apaga o user que fez a requisição se não houver query params
+        Caso haja query params, o requisitante seja superuser e a query retornar APENAS 1 resultado, apaga o user.
+        Para apagar usuários em massa deve ser usado o django admin ou refinar um pouco mais a api
+        Ex. DELETE http://localhost:8000/u/
+        """
+        query_params = ['username', 'email', 'first_name', 'last_name']
+        user, response = get_user_from_request(request, query_params)
+        if response:
+            return response
+        username = user.username
+        user.delete()
+        return GeneralApiResponse.ok(f'{username} apagado com sucesso!')
+
     def post(self, request, *args, **kwargs):
         """
         Um usuário pode alterar os próprios dados através da autenticação.
@@ -146,25 +162,11 @@ class UserActions(APIView):
         """
         body = request.data
         body_keys = body.keys()
-        get_keys = list(request.GET.keys())
         updatable_fields = ['username', 'email', 'first_name', 'last_name']
         query_params = ['username', 'email', 'first_name', 'last_name']
-        if len(get_keys) > 0:
-            if request.user.is_superuser:
-                if any(query_param not in query_params for query_param in get_keys):
-                    return GeneralApiResponse.bad_request()  # algum query param na requisição de user ta zoado
-                users = User.objects.filter(**request.GET.dict())
-                if not users.exists():
-                    return GeneralApiResponse.not_found()  # não achou usuário que atendesse à query
-                elif len(users) > 1:
-                    return GeneralApiResponse.bad_request()  # query retornou mais de um usuário para alterar
-                else:
-                    user = users[0]
-            else:
-                return GeneralApiResponse.unauthorized()
-        else:
-            user = request.user
-
+        user, response = get_user_from_request(request, query_params)
+        if response:
+            return response
         # ignora qualquer campo na requisição que não seja os de update do usuário
         for key in body_keys:
             if key in updatable_fields:
