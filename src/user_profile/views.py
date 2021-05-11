@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 from src.utils.general_responses import GeneralApiResponse
+from src.utils.permissions import SuperuserPermission
 
 
 class AuthToken(APIView):
@@ -50,16 +51,19 @@ class AuthToken(APIView):
             token, created = Token.objects.get_or_create(user=user)
         except Exception as e:
             return GeneralApiResponse.server_error()
-        return JsonResponse({'token': token})
+        return JsonResponse({'token': token.key})
 
 
 class RegisterUser(APIView):
-    permission_classes = []
-    authentication_classes = []
+    # Apenas usuários autenticados podem cadastrar novos usuários.
+    # Estes devem ser superusuarios
+    permission_classes = [SuperuserPermission]
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         """
+        Cria um novo usuário na base.
+        Caso o email ja esteja registrado, não completa o registro
         Ex: POST http://localhost:8000/u/register
             {
                 "name": "Roberto Almeida do Amaral",
@@ -69,7 +73,6 @@ class RegisterUser(APIView):
         """
         required_keys = ['name', 'email', 'password']
         request_data_keys = list(request.data.keys())
-
         if all([key in request_data_keys for key in required_keys]):
             name = request.data['name']
             email = request.data['email']
