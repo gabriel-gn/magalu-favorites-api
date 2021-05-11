@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 
 from django.contrib.auth.models import User
 
+from src.user_profile.serializers import UserSerializer
 from src.utils.general_responses import GeneralApiResponse
 from src.utils.permissions import SuperuserPermission
 
@@ -95,3 +96,28 @@ class RegisterUser(APIView):
             }, safe=False, status=200)
         else:
             return GeneralApiResponse.bad_request()
+
+
+class UserActions(APIView):
+    # Apenas usuários autenticados podem ver dados dos usuários.
+    http_method_names = ['get', 'post', 'delete']
+
+    def get(self, request, *args, **kwargs):
+        """
+        Retorna os dados do usuário autenticado caso não tenha query param
+        Caso tenha alguma das query params, filtra na lista de usuarios
+        Ex. GET http://localhost:8000/u
+        Ex. GET http://localhost:8000/u?first_name=roberto
+        """
+        query_params = ['username', 'email', 'first_name', 'last_name']
+        request_get_keys = list(request.GET.keys())
+        if any(query_param in request_get_keys for query_param in query_params):
+            filter_kwargs = dict()
+            for query_param in request_get_keys:
+                filter_kwargs[query_param + '__icontains'] = request.GET[query_param]
+            users = User.objects.filter(**filter_kwargs)
+            serializer = UserSerializer(users, many=True)
+        else:
+            serializer = UserSerializer(request.user, many=False)
+        return JsonResponse(serializer.data, safe=False)
+
