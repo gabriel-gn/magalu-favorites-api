@@ -5,8 +5,8 @@ from rest_framework.response import Response
 class GeneralApiResponse:
 
     @staticmethod
-    def ok():
-        return Response({'message': 'solicitação concluída'}, status=status.HTTP_200_OK)
+    def ok(message='solicitação concluída'):
+        return Response({'message': message}, status=status.HTTP_200_OK)
 
     @staticmethod
     def bad_request():
@@ -19,6 +19,10 @@ class GeneralApiResponse:
     @staticmethod
     def forbidden():
         return Response({'message': 'você não tem permissão para acessar'}, status=status.HTTP_403_FORBIDDEN)
+
+    @staticmethod
+    def not_found():
+        return Response({'message': 'não encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
     @staticmethod
     def conflict():

@@ -103,7 +103,7 @@ class RegisterUser(APIView):
 
 
 class UserActions(APIView):
-    # Apenas usuários autenticados podem ver dados dos usuários.
+    # Apenas usuários autenticados podem ver e mexer em dados dos usuários.
     http_method_names = ['get', 'post', 'delete']
 
     def get(self, request, *args, **kwargs):
@@ -123,5 +123,53 @@ class UserActions(APIView):
             serializer = UserSerializer(users, many=True)
         else:
             serializer = UserSerializer(request.user, many=False)
+        return JsonResponse(serializer.data, safe=False)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Um usuário pode alterar os próprios dados através da autenticação.
+        Um superusuario pode alterar dados de outros usuários caso a query retorne apenas um user
+        Se não houver parâmetros de query, tentará alterar o usuário que fez a requisição
+        No caso, como o email é único, é a melhor forma de buscar (Essa query é case sensitive)
+
+        Ex. POST http://localhost:8000/u/
+        {
+            "first_name": "Gabriel",
+            "last_name": "Nogueira"
+        }
+
+        Ex. POST http://localhost:8000/u/?email=robertinho@gmail.com
+        {
+            "first_name": "Alberto",
+            "last_name": "Santana"
+        }
+        """
+        body = request.data
+        body_keys = body.keys()
+        get_keys = list(request.GET.keys())
+        updatable_fields = ['username', 'email', 'first_name', 'last_name']
+        query_params = ['username', 'email', 'first_name', 'last_name']
+        if len(get_keys) > 0:
+            if request.user.is_superuser:
+                if any(query_param not in query_params for query_param in get_keys):
+                    return GeneralApiResponse.bad_request()  # algum query param na requisição de user ta zoado
+                users = User.objects.filter(**request.GET.dict())
+                if not users.exists():
+                    return GeneralApiResponse.not_found()  # não achou usuário que atendesse à query
+                elif len(users) > 1:
+                    return GeneralApiResponse.bad_request()  # query retornou mais de um usuário para alterar
+                else:
+                    user = users[0]
+            else:
+                return GeneralApiResponse.unauthorized()
+        else:
+            user = request.user
+
+        # ignora qualquer campo na requisição que não seja os de update do usuário
+        for key in body_keys:
+            if key in updatable_fields:
+                setattr(user, key, body[key])
+        user.save()
+        serializer = UserSerializer(user, many=False)
         return JsonResponse(serializer.data, safe=False)
 
