@@ -1,0 +1,194 @@
+[
+  {
+    "model": "products.productbrand",
+    "pk": 1,
+    "fields": {
+      "created": "2021-05-12T02:22:30.792Z",
+      "modified": "2021-05-12T02:22:30.792Z",
+      "name": "Savegnago",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 2,
+    "fields": {
+      "created": "2021-05-12T02:22:46.147Z",
+      "modified": "2021-05-12T02:22:46.147Z",
+      "name": "Verduras Aleluia",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 3,
+    "fields": {
+      "created": "2021-05-12T02:22:55.928Z",
+      "modified": "2021-05-12T02:22:55.928Z",
+      "name": "Netflix",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 4,
+    "fields": {
+      "created": "2021-05-12T02:23:05.615Z",
+      "modified": "2021-05-12T02:23:05.615Z",
+      "name": "Jovem Nerd",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 5,
+    "fields": {
+      "created": "2021-05-12T02:23:16.431Z",
+      "modified": "2021-05-12T02:23:16.431Z",
+      "name": "Intel",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 6,
+    "fields": {
+      "created": "2021-05-12T02:23:22.143Z",
+      "modified": "2021-05-12T02:23:22.143Z",
+      "name": "AMD",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 7,
+    "fields": {
+      "created": "2021-05-12T02:23:56.630Z",
+      "modified": "2021-05-12T02:23:56.630Z",
+      "name": "Leroy Merlin",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 8,
+    "fields": {
+      "created": "2021-05-12T02:24:41.367Z",
+      "modified": "2021-05-12T02:24:41.367Z",
+      "name": "Gardena",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.productbrand",
+    "pk": 9,
+    "fields": {
+      "created": "2021-05-12T02:24:54.031Z",
+      "modified": "2021-05-12T02:24:54.031Z",
+      "name": "Gabriel Inc LTDA",
+      "category": 0
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "created": "2021-05-12T03:01:33.618Z",
+      "modified": "2021-05-12T03:01:33.618Z",
+      "title": "Alface",
+      "description": "Nutritivo",
+      "price": 5.0,
+      "image": "https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png",
+      "brand": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "created": "2021-05-12T03:02:36.145Z",
+      "modified": "2021-05-12T03:02:36.145Z",
+      "title": "Banana",
+      "description": "Fruta",
+      "price": 9.0,
+      "image": "https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png",
+      "brand": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "created": "2021-05-12T03:03:31.441Z",
+      "modified": "2021-05-12T03:03:31.441Z",
+      "title": "Tesoura",
+      "description": "corta",
+      "price": 15.9,
+      "image": "https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png",
+      "brand": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "created": "2021-05-12T03:03:58.528Z",
+      "modified": "2021-05-12T03:03:58.528Z",
+      "title": "PC Gamer",
+      "description": "BRABÍSSIMO",
+      "price": 9999.0,
+      "image": "https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png",
+      "brand": 5
+    }
+  },
+  {
+    "model": "products.productreview",
+    "pk": 1,
+    "fields": {
+      "created": "2021-05-12T03:04:19.706Z",
+      "modified": "2021-05-12T03:04:19.706Z",
+      "user": 1,
+      "product": 4,
+      "rating": 100,
+      "description": "Cyberpunk 2077 no Ultra"
+    }
+  },
+  {
+    "model": "products.productreview",
+    "pk": 2,
+    "fields": {
+      "created": "2021-05-12T03:04:34.906Z",
+      "modified": "2021-05-12T03:05:01.916Z",
+      "user": 1,
+      "product": 2,
+      "rating": 85,
+      "description": "Nutritiva"
+    }
+  },
+  {
+    "model": "products.productreview",
+    "pk": 3,
+    "fields": {
+      "created": "2021-05-12T03:04:50.771Z",
+      "modified": "2021-05-12T03:04:50.771Z",
+      "user": 1,
+      "product": 1,
+      "rating": 32,
+      "description": "Meio sem graça, porém saudável"
+    }
+  },
+  {
+    "model": "products.userfavorites",
+    "pk": 1,
+    "fields": {
+      "created": "2021-05-12T03:11:56.492Z",
+      "modified": "2021-05-12T03:11:56.492Z",
+      "user": 1,
+      "products": [
+        4,
+        2,
+        1
+      ]
+    }
+  }
+]
