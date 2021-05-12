@@ -21,6 +21,12 @@ class ProductBrand(DefaultModel):
     category = models.PositiveIntegerField(choices=CATEGORIES, default=0)
 
 
+class ProductReview(DefaultModel):
+    user = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_NULL)
+    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    description = models.TextField(default='', blank=True)
+
+
 class Product(DefaultModel):
     title = models.CharField(max_length=256, default='Novo Produto')
     description = models.TextField(default='', blank=True)
@@ -30,13 +36,7 @@ class Product(DefaultModel):
         default='https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png'
     )
     brand = models.ForeignKey(ProductBrand, default=None, null=True, on_delete=models.SET_NULL)
-
-
-class ProductReview(DefaultModel):
-    user = models.ForeignKey(User, default=None, null=True, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, default=None, null=True, on_delete=models.CASCADE)
-    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    description = models.TextField(default='', blank=True)
+    reviews = models.ManyToManyField(ProductReview)
 
 
 class UserFavorites(DefaultModel):
