@@ -30,7 +30,7 @@ class Product(DefaultModel):
     price = models.FloatField(validators=[MinValueValidator(0)])
     image = models.CharField(
         max_length=256,
-        default='https://www.pngkey.com/png/full/75-754812_question-mark-image-point-d-interrogation-png.png'
+        default='https://picsum.photos/200'
     )
     brand = models.ForeignKey(ProductBrand, default=None, null=True, on_delete=models.SET_NULL)
 
