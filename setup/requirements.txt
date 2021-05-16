@@ -4,5 +4,9 @@ psycopg2-binary==2.8.6
 djangorestframework==3.12.4
 django-cors-headers==3.7.0
 
+#RANDOM DATA
+django-seed==0.2.2
+RandomWords==0.3.0
+
 # PYTHON GERAL
 requests==2.25.1

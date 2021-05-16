@@ -50,7 +50,7 @@ class ProductReview(DefaultModel):
 
 class UserFavorites(DefaultModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, symmetrical=False, blank=False)
+    products = models.ManyToManyField(Product, symmetrical=False, blank=True)
 
     def __str__(self):
         return self.user.email

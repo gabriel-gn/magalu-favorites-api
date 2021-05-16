@@ -15,7 +15,8 @@ import random
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,27 +28,38 @@ SECRET_KEY = 'django-insecure-@q&av-(2c2!)&ev-0(h2!q$4om000)g$02uy*-iv03i03kjuvh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # TODO alterar para utilizar variáveis de ambiente
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
+    # base do django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # rest_framework para views e autenticação
     'rest_framework',
     'rest_framework.authtoken',
-    'user_profile',
-    'products',
+    # apps do projeto
+    'src.user_profile.apps.UserProfileConfig',
+    'src.products.apps.ProductsConfig',
+    # gerar massa de dados
+    'django_seed',
 ]
+
+# CORS-HEADERS
+# CORS_ALLOWED_ORIGINS = []
+CORS_ORIGIN_ALLOW_ALL = True  # TODO transformar em variáveis de ambiente
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
