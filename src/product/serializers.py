@@ -1,7 +1,7 @@
 from django.db.models import Avg
 from rest_framework import serializers
 
-from src.product.models import Product, ProductReview
+from src.product.models import Product, ProductReview, ProductBrand
 from src.user_profile.serializers import UserSerializer
 
 
@@ -13,10 +13,26 @@ class ProductReviewSerializer(serializers.ModelSerializer):
         fields = ['user', 'product', 'rating', 'description']
 
 
+class ProductBrandSerializer(serializers.ModelSerializer):
+    category = serializers.SerializerMethodField()
+
+    def get_category(self, obj):
+        """
+        Category é um choice field, por isso são armazenados ints no bd
+        Para retornar o nome atrelado, é necessário usar o 'get_xxx_display()'
+        """
+        return obj.get_category_display()
+
+    class Meta:
+        model = ProductBrand
+        fields = ['name', 'category']
+
+
 class ProductSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
     reviewScore = serializers.SerializerMethodField()
     reviews = serializers.SerializerMethodField()
+    brand = ProductBrandSerializer(many=False, read_only=True)
 
     def get_id(self, obj):
         """
@@ -42,4 +58,4 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'price', 'image', 'reviewScore', 'reviews']
+        fields = ['id', 'title', 'description', 'brand', 'price', 'image', 'reviewScore', 'reviews']
