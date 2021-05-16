@@ -5,10 +5,16 @@ from .models import *
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'brand', 'created', 'modified')
+    list_display = ('pk', 'title', 'price', 'brand', 'reviews', 'created', 'modified')
     # list_filter = ()
     # search_fields = ()
     ordering = ('-modified', '-created')
+
+    def reviews(self, obj):
+        """
+        Retorna a quantidade de reviews para este produto
+        """
+        return len(ProductReview.objects.filter(product=obj))
 
 
 @admin.register(ProductBrand)
