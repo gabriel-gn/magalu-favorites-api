@@ -15,7 +15,7 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
-    review_score = serializers.SerializerMethodField()
+    reviewScore = serializers.SerializerMethodField()
     reviews = serializers.SerializerMethodField()
 
     def get_id(self, obj):
@@ -24,7 +24,7 @@ class ProductSerializer(serializers.ModelSerializer):
         """
         return obj.pk
 
-    def get_review_score(self, obj):
+    def get_reviewScore(self, obj):
         """
         Retorna a média dos reviews do produto
         """
@@ -40,4 +40,4 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'price', 'image', 'review_score', 'reviews']
+        fields = ['id', 'title', 'description', 'price', 'image', 'reviewScore', 'reviews']
