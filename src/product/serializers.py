@@ -27,6 +27,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_reviewScore(self, obj):
         """
         Retorna a média dos reviews do produto
+        Caso não seja problema retornar 'null' (já que mean pode ser None), retornar mean diretamente.
         """
         mean = ProductReview.objects.filter(product=obj).aggregate(Avg('rating'))['rating__avg']
         return mean if mean else 0
