@@ -22,7 +22,7 @@ class AuthToken(APIView):
         """
         Retorna um token de autenticação necessário para fazer chamadas autenticadas
         Incluir "Authotization: Token <valor do token>" no header para fazer chamadas autenticadas
-        Ex: POST http://localhost:8000/u/auth
+        Ex: POST http://localhost:8000/user/auth
         {
             "email": "gabrielgomesnogueira@gmail.com",
             "password": "gabrielgn"
@@ -66,7 +66,7 @@ class RegisterUser(APIView):
         """
         Cria um novo usuário na base.
         Caso o email ja esteja registrado, não completa o registro
-        Ex: POST http://localhost:8000/u/register
+        Ex: POST http://localhost:8000/user/register
             {
                 "name": "Roberto Almeida do Amaral",
                 "email": "robertinho@gmail.com",
@@ -111,8 +111,8 @@ class UserActions(APIView):
         """
         Retorna os dados do usuário autenticado caso não tenha query param
         Caso tenha alguma das query params, filtra na lista de usuarios
-        Ex. GET http://localhost:8000/u
-        Ex. GET http://localhost:8000/u?first_name=roberto
+        Ex. GET http://localhost:8000/user
+        Ex. GET http://localhost:8000/user?first_name=roberto
         """
         query_params = ['username', 'email', 'first_name', 'last_name']
         request_get_keys = list(request.GET.keys())
@@ -131,7 +131,7 @@ class UserActions(APIView):
         Apaga o user que fez a requisição se não houver query params
         Caso haja query params, o requisitante seja superuser e a query retornar APENAS 1 resultado, apaga o user.
         Para apagar usuários em massa deve ser usado o django admin ou refinar um pouco mais a api
-        Ex. DELETE http://localhost:8000/u/
+        Ex. DELETE http://localhost:8000/user/
         """
         query_params = ['username', 'email', 'first_name', 'last_name']
         user, response = get_user_from_request(request, query_params)
@@ -148,13 +148,13 @@ class UserActions(APIView):
         Se não houver parâmetros de query, tentará alterar o usuário que fez a requisição
         No caso, como o email é único, é a melhor forma de buscar (Essa query é case sensitive)
 
-        Ex. POST http://localhost:8000/u/
+        Ex. POST http://localhost:8000/user/
         {
             "first_name": "Gabriel",
             "last_name": "Nogueira"
         }
 
-        Ex. POST http://localhost:8000/u/?email=robertinho@gmail.com
+        Ex. POST http://localhost:8000/user/?email=robertinho@gmail.com
         {
             "first_name": "Alberto",
             "last_name": "Santana"

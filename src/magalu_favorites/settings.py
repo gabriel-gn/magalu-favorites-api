@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['*']  # TODO alterar para utilizar variáveis de ambiente
 INSTALLED_APPS = [
     'corsheaders',
     # base do django
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,11 +47,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     # apps do projeto
-    'src.user_profile.apps.UserProfileConfig',
-    'src.products.apps.ProductsConfig',
+    'user_profile',
+    'product',
     # gerar massa de dados
     'django_seed',
 ]
+
+SITE_ID = 1
 
 # CORS-HEADERS
 # CORS_ALLOWED_ORIGINS = []

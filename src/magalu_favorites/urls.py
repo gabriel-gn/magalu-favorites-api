@@ -27,6 +27,6 @@ def django_healthcheck(request):
 urlpatterns = [
     path('', django_healthcheck, name='index'),
     path('admin/', admin.site.urls),
-    path('u/', include('user_profile.urls')),
-    path('p/', include('products.urls')),
+    path('user/', include('user_profile.urls')),
+    path('product/', include('product.urls')),
 ]
