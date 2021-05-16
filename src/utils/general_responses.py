@@ -9,8 +9,8 @@ class GeneralApiResponse:
         return Response({'message': message}, status=status.HTTP_200_OK)
 
     @staticmethod
-    def bad_request():
-        return Response({'message': 'requisição inválida'}, status=status.HTTP_400_BAD_REQUEST)
+    def bad_request(message='requisição inválida'):
+        return Response({'message': message}, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
     def unauthorized():
