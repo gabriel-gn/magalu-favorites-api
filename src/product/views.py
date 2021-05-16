@@ -21,12 +21,10 @@ class Products(APIView):
         """
         if self.kwargs.get('product_pk'):
             try:
-                product = Product.objects.filter(pk=self.kwargs.get('product_pk'))
-                if product.exists():
-                    serializer = ProductSerializer(product[0], many=False)
-                    return JsonResponse(serializer.data, safe=False)
-                else:
-                    return GeneralApiResponse.bad_request()
+                product = Product.objects.get(pk=self.kwargs.get('product_pk'))
+                serializer = ProductSerializer(product, many=False)
+                return JsonResponse(serializer.data, safe=False)
+            # o 'objects.get' vai falhar caso o kwarg seja preenchido incorretamente, ou não existir
             except:
                 return GeneralApiResponse.bad_request()
         else:
