@@ -53,7 +53,7 @@ class UserFavorites(DefaultModel):
     products = models.ManyToManyField(Product, symmetrical=False, blank=True)
 
     def __str__(self):
-        return self.user.email
+        return self.user.email  # email == username
 
 
 @receiver(post_save, sender=User)
