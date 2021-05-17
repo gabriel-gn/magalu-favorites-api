@@ -16,11 +16,12 @@ def get_user_from_request(request, available_query_params: list()) -> Tuple[User
         if request.user.is_superuser:
             if any(query_param not in available_query_params for query_param in get_keys):
                 return None, GeneralApiResponse.bad_request()  # algum query param na requisição de user ta zoado
-            users = User.objects.filter(**request.GET.dict())
+            ignore_page_query_params = {key: v for key, v in request.GET.dict().items() if key not in ['page']}
+            users = User.objects.filter(**ignore_page_query_params)  # ignora o query param "page"
             if not users.exists():
                 return None, GeneralApiResponse.not_found()  # não achou usuário que atendesse à query
             elif len(users) > 1:
-                return None, GeneralApiResponse.bad_request()  # query retornou mais de um usuário para alterar
+                return None, GeneralApiResponse.bad_request('a query retorna mais de um user')
             else:
                 return users[0], None
         else:

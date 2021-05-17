@@ -31,3 +31,7 @@ if __name__ == '__main__':
     })
 
     inserted_pks = seeder.execute()
+
+    for user in User.objects.all():
+        user.username = user.email
+        user.save()
