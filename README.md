@@ -77,3 +77,11 @@ Ao ter sucesso, as requisições devem estar disponíveis na barra lateral à es
 Ao clicar sobre uma requisição, ela já estará montada, e a documentação dela pode ser acessada na aba "Docs", abaixo da barra de endereço da requisição.
 
 **IMPORTANTE**: As chamadas que necessitam autenticação devem ter tokens válidos! Para isso, utilize a chamada "Token de autenticação" dentro da pasta "Autenticação" disponível no insomnia
+
+## Últimas notas
+
+Muito do desenvolvimento desta API poderia ter sido incrivelmente simplificada utilizando views, mixins e funções já prontas do framework Django Rest Framework.
+
+A motivação de não utilizar apenas o rest framework foi mostrar como desenvolver lógica própria nas views, caso seja necessário personalizar as funções já prontas que o framework oferece.
+
+Qualquer dúvida sobre lógica, código ou desenvolvimento estou à disposição!
