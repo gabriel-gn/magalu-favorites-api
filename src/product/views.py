@@ -12,6 +12,8 @@ from ..user_profile.tasks import get_user_from_request
 
 
 class Products(APIView):
+    permission_classes = []
+    authentication_classes = []
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
@@ -43,7 +45,7 @@ class Products(APIView):
                 for query_param in request_get_keys:
                     if query_param != 'page':
                         filter_kwargs[query_param + '__icontains'] = request.GET[query_param]
-                products = Product.objects.filter(**filter_kwargs)
+                products = Product.objects.filter(**filter_kwargs).order_by('pk')
                 result_page = paginator.paginate_queryset(products, request)
                 serializer = ProductSerializer(result_page, many=True)
                 return JsonResponse(serializer.data, safe=False)

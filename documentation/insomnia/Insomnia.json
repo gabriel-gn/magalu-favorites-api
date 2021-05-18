@@ -1,0 +1,509 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2021-05-18T00:19:25.754Z",
+  "__export_source": "insomnia.desktop.app:v2021.3.0",
+  "resources": [
+    {
+      "_id": "req_72c879c25c194ab5a826d4cc15f28b77",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621296365302,
+      "created": 1621295968075,
+      "url": "http://localhost:8000/product/?page=1&title=a",
+      "name": "RETORNAR produtos",
+      "description": "### Retorna os produtos paginados\nA query param `page` é opcional, se não for fornecida, assume que é a primeira página.\nOs resultados são paginados de 10 em 10 (TODO: Refatorar e permitir alterar o numero de itens)\n\nQuery Params suportados: `'title', 'price', 'brand', 'page'`",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Roberto Almeida do Amaral\",\n\t\"email\": \"robertinho@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1621294917649,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_064e2cbf73ff425cae668e0312436429",
+      "parentId": "fld_92d7adde26304ad9acd9f29d3f2bb96b",
+      "modified": 1621295897391,
+      "created": 1621295897391,
+      "name": "Produtos",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1621295897391,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_92d7adde26304ad9acd9f29d3f2bb96b",
+      "parentId": "wrk_1f2ea6b492084e55a1540555d3d7c3d2",
+      "modified": 1621294165147,
+      "created": 1620689344084,
+      "name": "API Luizalabs",
+      "description": "API para criação de usuarios, produtos e favoritos da luiza labs. Favor navegar pelos endpoints menu lateral esquerdo.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1620689344084,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_1f2ea6b492084e55a1540555d3d7c3d2",
+      "parentId": null,
+      "modified": 1586666339902,
+      "created": 1586666339902,
+      "name": "API de produtos e favoritos Luiza Labs",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_f7cb7ccbe57b4151b695d7296584097a",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621296363197,
+      "created": 1621296016590,
+      "url": "http://localhost:8000/product/5",
+      "name": "RETORNAR produto por ID",
+      "description": "### Retorna um produto por seu id (pk)\nRetorna os dados de um produto por seu id se o id existir",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Roberto Almeida do Amaral\",\n\t\"email\": \"robertinho@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1621294917636.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_337bc42aa48848f3847e7cd147d8e90e",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621296471520,
+      "created": 1621296409914,
+      "url": "http://localhost:8000/product",
+      "name": "CRIAR novo produto",
+      "description": "### TODO\nAinda não implementado. Utilizar o django admin por enquanto, ou criar via código\n\n`Product.objects.create()`",
+      "method": "POST",
+      "body": { "mimeType": "application/json", "text": "{}" },
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1621294917630.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d1d4a33657b246149e5f7de4a1540269",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621296686810,
+      "created": 1621296523458,
+      "url": "http://localhost:8000/product/favorites",
+      "name": "RETORNAR lista de favoritos",
+      "description": "### Retorna a lista de favoritos para um usuário\nCaso não tenha query params, retorna a lista de favoritos do usuário autenticado.\n\nCaso tenha query params e o requisitante seja um superusuario, é possível retornar a lista de outro usuário DESDE que a query retorne apenas um user.\n\nQueryParams suportados: `'username', 'email', 'first_name', 'last_name', 'page'`",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Roberto Almeida do Amaral\",\n\t\"email\": \"robertinho@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_2460b69a7017477c9d22cc1e169bfaa7"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294917580.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_844c6efa6d1b4ddfb213ee9f4350fe17",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621297065383,
+      "created": 1621296851617,
+      "url": "http://localhost:8000/product/favorites?email=gabrielgomesnogueira@gmail.com",
+      "name": "ADICIONAR na lista de favoritos",
+      "description": "### Retorna a lista de favoritos para um usuário\nCaso não tenha query params, adiciona produtos a lista de favoritos do usuário autenticado.\n\nCaso tenha query params e o requisitante seja um superusuario, é possível adicionar a lista de outro usuário DESDE que a query retorne apenas um user.\n\nO corpo do payload deve obrigatoriamente conter `action` ('add') e `products` (int[]).\n\nProdutos duplicados não são adicionados por padrão, e ignorados.\n\nQueryParams suportados: `'username', 'email', 'first_name', 'last_name', 'page'`",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"action\": \"add\",\n\t\"products\": [\n\t\t1,\n\t\t2,\n\t\t3\n\t]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_2460b69a7017477c9d22cc1e169bfaa7"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_7f68e076391c42768bc2176651be27e8"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294731802.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c05cded56491483ba2017235c0608b7f",
+      "parentId": "fld_064e2cbf73ff425cae668e0312436429",
+      "modified": 1621297113440,
+      "created": 1621297075679,
+      "url": "http://localhost:8000/product/favorites?email=gabrielgomesnogueira@gmail.com",
+      "name": "REMOVER da lista de favoritos",
+      "description": "### Remove itens da lista de favoritos de um usuário\nCaso não tenha query params, remove produtos da lista de favoritos do usuário autenticado.\n\nCaso tenha query params e o requisitante seja um superusuario, é possível remover da lista de outro usuário DESDE que a query retorne apenas um user.\n\nO corpo do payload deve obrigatoriamente conter `action` ('remove') e `products` (int[]).\n\nProdutos duplicados não são adicionados por padrão, e ignorados.\n\nQueryParams suportados: `'username', 'email', 'first_name', 'last_name', 'page'`",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"action\": \"remove\",\n\t\"products\": [\n\t\t1,\n\t\t2,\n\t\t3\n\t]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_2460b69a7017477c9d22cc1e169bfaa7"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_7f68e076391c42768bc2176651be27e8"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294638913.4375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_175e383d704a48f0ac5076cda3e2cc69",
+      "parentId": "fld_9095104a1d164d159192d492df5908be",
+      "modified": 1621296413935,
+      "created": 1621294569859,
+      "url": "http://localhost:8000/user/register",
+      "name": "CRIAR novo usuário",
+      "description": "### Cria um novo usuário na base\nE possui um trigger para criar automaticamente uma lista de favoritos atrelada ao usuário criado.\n\nCaso o usuário já esteja registrado, não completa o registro.\n\nO parâmetro `password` é opcional, se não for fornecido, é criado aleatoriamente (TODO: pode ser usado para posteriormente o usuário redefinir)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Roberto Almeida do Amaral\",\n\t\"email\": \"robertinho@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d0c2cdcc43514831bb37da2e43f470ee"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_25a5c9192ed94e178a0b3b906b551592"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294917674,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_9095104a1d164d159192d492df5908be",
+      "parentId": "fld_92d7adde26304ad9acd9f29d3f2bb96b",
+      "modified": 1621294563955,
+      "created": 1621294549471,
+      "name": "Usuários",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1621294549471,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_70f1545646674602b99aba4a06c07c56",
+      "parentId": "fld_9095104a1d164d159192d492df5908be",
+      "modified": 1621295958766,
+      "created": 1621294917424,
+      "url": "http://localhost:8000/user?first_name=roberto",
+      "name": "RETORNAR dados do usuário",
+      "description": "### Retorna os dados do usuário\nRetorna os dados do usuário autenticado.\n\nCaso possua queryparams E SEJA um superusuario, é possível consultar dados de outros usuários que a consulta encontre.\n\nQueryparams válidos: `'username', 'email', 'first_name', 'last_name'`",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_1c080b00bc8f4f169e516984650cc5c6"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294917624,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a2546826e1c742dca5ab3f99aed98816",
+      "parentId": "fld_9095104a1d164d159192d492df5908be",
+      "modified": 1621295964198,
+      "created": 1621295105915,
+      "url": "http://localhost:8000/user?first_name=roberto",
+      "name": "ALTERAR dados do usuário",
+      "description": "### Altera os dados do usuário\nAltera os dados do usuário autenticado.\n\nCaso possua queryparams E SEJA um superusuario, é possível alterar dados de outros usuários, caso a consulta encontre apenas um usuário.\n\nQueryparams válidos: `'username', 'email', 'first_name', 'last_name'`",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"first_name\": \"Gabriel\",\n\t\"last_name\": \"Gomes Nogueira\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_1c080b00bc8f4f169e516984650cc5c6"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bca6c55a76cd48cebd59205b5dce5aaf"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294546024.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c544d9ebfef446dca6d05756d2feb0e0",
+      "parentId": "fld_9095104a1d164d159192d492df5908be",
+      "modified": 1621295285781,
+      "created": 1621295198940,
+      "url": "http://localhost:8000/user?first_name=roberto",
+      "name": "APAGAR usuário",
+      "description": "### Altera os dados do usuário\nApaga o usuário autenticado caso não tenha query params e todos os dados com a trigger `on_delete=models.SET_NULL`\n\nCaso possua queryparams E SEJA um superusuario, é possível apagar outros usuários, caso a consulta encontre apenas um usuário.\n\nQueryparams válidos: `'username', 'email', 'first_name', 'last_name'`",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"first_name\": \"Gabriel\",\n\t\"last_name\": \"Gomes Nogueira\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token 5c91488338d2f20952fd41a36998e8c7d21bed38",
+          "description": "",
+          "id": "pair_1c080b00bc8f4f169e516984650cc5c6"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_bca6c55a76cd48cebd59205b5dce5aaf"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294360224.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_55261b85e1ab4be1a91b331592e8025d",
+      "parentId": "fld_e7303a0cff82478a9332f1a7b7f4dd08",
+      "modified": 1621294892914,
+      "created": 1621294174425,
+      "url": "http://localhost:8000/user/auth",
+      "name": "Token de autenticação",
+      "description": "### Retorna um token de autenticação\nCom este token é possível identificar o usuário que fez a chamada ao backend.\n\nNecessário para fazer chamadas autenticadas. Todas as consultas a dados de outros usuários que não sejam o requisitante necessitam que o usuário seja um superuser (possível mudar isso no django admin)\n\nIncluir `Authotization: Token <valor do token>` no header para fazer chamadas autenticadas",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"gabrielgomesnogueira@gmail.com\",\n\t\"password\": \"gabrielgn\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_c84dfedada5f42c3a3f850b3c0c691e6"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1621294174425,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_e7303a0cff82478a9332f1a7b7f4dd08",
+      "parentId": "fld_92d7adde26304ad9acd9f29d3f2bb96b",
+      "modified": 1621294148475,
+      "created": 1621294139713,
+      "name": "Autenticação",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1621294139713,
+      "_type": "request_group"
+    },
+    {
+      "_id": "env_ec7b0e24f1e02f8a5205af5079a8ee5c11fcef2a",
+      "parentId": "wrk_1f2ea6b492084e55a1540555d3d7c3d2",
+      "modified": 1586666339926,
+      "created": 1586666339926,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1586666339926,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_ec7b0e24f1e02f8a5205af5079a8ee5c11fcef2a",
+      "parentId": "wrk_1f2ea6b492084e55a1540555d3d7c3d2",
+      "modified": 1599713383913,
+      "created": 1586666339928,
+      "name": "Default Jar",
+      "cookies": [
+        {
+          "creation": "2020-05-11T15:33:13.095Z",
+          "domain": "google.com",
+          "expires": "2020-06-10T15:33:12.000Z",
+          "hostOnly": false,
+          "id": "877172393668969",
+          "key": "1P_JAR",
+          "lastAccessed": "2020-05-11T15:33:13.095Z",
+          "path": "/",
+          "secure": true,
+          "value": "2020-05-11-15"
+        },
+        {
+          "creation": "2020-05-11T15:33:13.095Z",
+          "domain": "google.com",
+          "expires": "2020-11-10T15:33:12.000Z",
+          "hostOnly": false,
+          "httpOnly": true,
+          "id": "5908207475705185",
+          "key": "NID",
+          "lastAccessed": "2020-05-11T15:33:13.095Z",
+          "path": "/",
+          "value": "204=P5PnRuu3WjOLi_P1tmpJe7qWpXzz_c50DwX32uMMJNhiZVi9bKCmhp9BCQCDmz84patDapiif6oNEaFFW96yqVm1X2WHKrNw7Jnz4a8XDmDg357voeTWKqWaa6G9klGhpoAlWI69aLLkbieh0p5Mw_xITrQpl2ZidwyxoJbXdjw"
+        },
+        {
+          "creation": "2020-05-11T18:26:16.618Z",
+          "domain": "localhost",
+          "expires": "2021-05-10T18:26:16.000Z",
+          "extensions": ["SameSite=Lax"],
+          "hostOnly": true,
+          "id": "7233283509710915",
+          "key": "csrftoken",
+          "lastAccessed": "2020-05-11T18:26:16.618Z",
+          "maxAge": 31449600,
+          "path": "/",
+          "value": "NNSI5ErloePKFcj2B34RK21857qnVF3UfYdDOk46TetT3I7LqCZiT5PWW2hLoehK"
+        },
+        {
+          "creation": "2020-09-10T02:25:47.392Z",
+          "domain": "pensive-waterfall-22363.pktriot.net",
+          "expires": "2021-09-09T04:49:43.000Z",
+          "extensions": ["SameSite=Lax"],
+          "hostOnly": true,
+          "id": "3029233573397807",
+          "key": "csrftoken",
+          "lastAccessed": "2020-09-10T04:49:43.913Z",
+          "maxAge": 31449600,
+          "path": "/",
+          "value": "hMLi9cUChuekdWSCPHbNBI3pMVCt2Topw4XJ26Z3Lfkqc1DLwOafM6q6kKLKvG1u"
+        }
+      ],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_5f8084382c604c11b924db1f3cf6c9eb",
+      "parentId": "wrk_1f2ea6b492084e55a1540555d3d7c3d2",
+      "modified": 1593005210068,
+      "created": 1593005210068,
+      "fileName": "Insomnia",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}

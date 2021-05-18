@@ -12,7 +12,7 @@ def get_user_from_request(request, available_query_params: list()) -> Tuple[User
     Retorna uma resposta de erro caso algo não possa ser completado
     """
     get_keys = list(request.GET.keys())
-    if len(get_keys) > 0:
+    if len(get_keys) != 0 or (len(get_keys) > 1 and 'page' in get_keys):
         if request.user.is_superuser:
             if any(query_param not in available_query_params for query_param in get_keys):
                 return None, GeneralApiResponse.bad_request()  # algum query param na requisição de user ta zoado
