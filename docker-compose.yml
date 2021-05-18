@@ -1,0 +1,50 @@
+version: '3'
+
+volumes:
+  pgdata:
+  docsdata:
+
+services:
+
+  backend:
+    build: .
+    container_name: labs_api
+    restart: unless-stopped
+    env_file:
+      - ./setup/prod.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - "postgres"
+    command: bash -c "/venv/bin/python src/manage.py makemigrations
+      && /venv/bin/python src/manage.py migrate
+      && /venv/bin/python src/manage.py loaddata initial_data.json
+      && /venv/bin/python src/generate_fake_data.py
+      & /venv/bin/python src/manage.py runserver 0:8000"
+
+  postgres:
+    image: postgres:latest
+    container_name: labs_postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: labs2021
+      POSTGRES_DB: luizalabsdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+  documentation:
+    image: node:latest
+    container_name: labs_docs
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    volumes:
+      - ${PWD}/documentation/insomnia:/insomnia
+    command: bash -c "cd /
+      && cd insomnia
+      && npx serve"
+
+

@@ -3,7 +3,7 @@
     "model": "auth.user",
     "pk": 1,
     "fields": {
-      "username": "admin",
+      "username": "gabrielgomesnogueira@gmail.com",
       "password": "pbkdf2_sha256$150000$9snFN6sWWFyj$caH2laszGfcXaZnH6HJ7cHRKHqGognZdcQZFHWsPdEE=",
       "email": "gabrielgomesnogueira@gmail.com",
       "first_name": "Gabriel",

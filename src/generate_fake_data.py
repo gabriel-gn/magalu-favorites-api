@@ -11,7 +11,7 @@ if __name__ == '__main__':
     from random_words import RandomWords
     from django_seed import Seed
     from django.contrib.auth.models import User
-    from product.models import *
+    from src.product.models import *
 
     rw = RandomWords()
     seeder = Seed.seeder()
