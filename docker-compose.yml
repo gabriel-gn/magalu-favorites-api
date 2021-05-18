@@ -22,6 +22,8 @@ services:
       && /venv/bin/python src/generate_fake_data.py
       & /venv/bin/python src/manage.py runserver 0:8000"
 
+  # 'ports' pode ser substituída por 'expose: 5432' caso queira que a base não esteja exposta
+  # Então ela só será acessível dentro dos nós da stack do compose
   postgres:
     image: postgres:latest
     container_name: labs_postgres
